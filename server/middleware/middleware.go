@@ -46,7 +46,6 @@ func GetAllProducts(w http.ResponseWriter, _ *http.Request) {
 
 	for j, beer := range beers {
 		beers[j].Temperature = result[beer.Id]
-
 		SetBeerTempStatus(&beers[j])
 	}
 
