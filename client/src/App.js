@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Beers } from './components/Beers/Beers';
 
 export class App extends Component {
   static displayName = App.name;
@@ -26,25 +27,7 @@ export class App extends Component {
         <p><em>Loading...</em></p>
       ) : (
       <>
-        <h2>Beers</h2>
-        <table>
-          <thead>
-            <tr>
-              <th align="left">Product</th>
-              <th align="left">Temperature</th>
-              <th align="left">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.products.map((product) => (
-              <tr key={product.id}>
-                <td width={150}>{product.name}</td>
-                <td width={150}>{product.temperature}</td>
-                <td width={150}>{product.temperatureStatus}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Beers products={this.state.products}/>
       </>
     );
 
