@@ -7,22 +7,16 @@ import (
 	"server/models"
 )
 
-const tooLow string = "too low"
-const tooHigh string = "too high"
-const allGood string = "all good"
-
 func SetBeerTempStatus(b *models.Beer) {
-	if b.Temperature < b.MinimumTemperature {
-		b.TemperatureStatus = tooLow
-	}
+	lowTemp := lowTemperature{}
+	highTemp := highTemperature{}
+	goodTemp := goodTemperature{}
 
-	if b.Temperature > b.MaximumTemperature {
-		b.TemperatureStatus = tooHigh
-	}
+	lowTemp.setNext(&highTemp)
+	highTemp.setNext(&goodTemp)
 
-	if b.Temperature >= b.MinimumTemperature && b.Temperature <= b.MaximumTemperature {
-		b.TemperatureStatus = allGood
-	}
+	lowTemp.execute(b)
+
 }
 
 func GetAllProducts(w http.ResponseWriter, _ *http.Request) {
